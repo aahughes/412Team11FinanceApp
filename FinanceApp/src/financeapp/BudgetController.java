@@ -5,7 +5,6 @@
  */
 package financeapp;
 
-import java.util.HashMap;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -40,8 +39,11 @@ public class BudgetController {
         
         Budgets budget = controller.findBudgets(category);
         budget.setBalance(balance);
-        
+
         controller.edit(budget);
-        
+    }
+    
+    public Budgets getBudget(String category){
+        return controller.findBudgets(category);        
     }
 }
