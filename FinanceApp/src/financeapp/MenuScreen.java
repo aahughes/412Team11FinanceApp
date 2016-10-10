@@ -7,7 +7,7 @@ package financeapp;
 
 // Aaron McFarland
 // airon1995@gmail.com
-// 23-Sep-16
+// 10-Oct-16
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,10 +20,11 @@ import java.awt.event.*;
 public class MenuScreen extends JFrame {
     private JPanel panel;
     private JLabel label;
-    private JButton balance;
-    private JButton history;
-    private JButton withdrawalDeposit;
-    private JButton settings;
+    private JButton budgetButton;
+    private JButton budgetEntryButton;
+    private JButton transactionEntryButton;
+    private JButton transactionHistoryButton;
+    private JButton settingsButton;
     private final int WINDOW_WIDTH = 200;
     private final int WINDOW_HEIGHT = 300;
     
@@ -36,27 +37,30 @@ public class MenuScreen extends JFrame {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        label = new JLabel("Welcome to _____");
+        label = new JLabel("Welcome to Finance App");
         
         // Creating the four buttons.
-        balance = new JButton("Balance");
-        history = new JButton("History");
-        withdrawalDeposit = new JButton("Withdrawal/Deposit");
-        settings = new JButton("Settings");
+        budgetButton = new JButton("Budget");
+        budgetEntryButton = new JButton("Budget Entry");
+        transactionEntryButton = new JButton("Transaction Entry");
+        transactionHistoryButton = new JButton("Transaction History");
+        settingsButton = new JButton("Settings");
         
         // Registering an event listener with all 4 buttons.
-        balance.addActionListener(new BalanceButtonListener());
-        history.addActionListener(new HistoryButtonListener());
-        withdrawalDeposit.addActionListener(new WithdrawalDepositButtonListener());
-        settings.addActionListener(new SettingsButtonListener());
+        budgetButton.addActionListener(new BudgetButtonListener());
+        budgetEntryButton.addActionListener(new BudgetEntryButtonListener());
+        transactionEntryButton.addActionListener(new TransactionEntryButtonListener());
+        transactionHistoryButton.addActionListener(new TransactionHistoryButtonListener());
+        settingsButton.addActionListener(new SettingsButtonListener());
         
         // Creating the panel and adding the components to it.
         panel = new JPanel();
         panel.add(label);
-        panel.add(balance);
-        panel.add(history);
-        panel.add(withdrawalDeposit);
-        panel.add(settings);
+        panel.add(budgetButton);
+        panel.add(budgetEntryButton);
+        panel.add(transactionEntryButton);
+        panel.add(transactionHistoryButton);
+        panel.add(settingsButton);
         
         // Adding the panel to the frame.
         add(panel);
@@ -67,10 +71,21 @@ public class MenuScreen extends JFrame {
     
     /**
      * Private inner class that handles event
-     * when the user clicks the Balance button.
+     * when the user clicks the Budget button.
      */
     
-    private class BalanceButtonListener implements ActionListener {
+    private class BudgetButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+           //BudgetViewScreen budgetViewScreen = new BudgetViewScreen();
+        }
+    }
+    
+    /**
+     * Private inner class that handles event
+     * when the user clicks the Budget Entry button.
+     */
+    
+    private class BudgetEntryButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
            
         }
@@ -78,25 +93,26 @@ public class MenuScreen extends JFrame {
     
     /**
      * Private inner class that handles event
-     * when the user clicks the History button.
+     * when the user clicks the Transaction Entry button.
      */
     
-    private class HistoryButtonListener implements ActionListener {
+    private class TransactionEntryButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-            
+            TransactionEntry transactionEntry = new TransactionEntry();
         }
     }
     
     /**
      * Private inner class that handles event
-     * when the user clicks the Withdrawal/Deposit button.
+     * when the user clicks the Transaction History button.
      */
     
-    private class WithdrawalDepositButtonListener implements ActionListener {
+    private class TransactionHistoryButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
             
         }
     }
+    
     
     /**
      * Private inner class that handles event

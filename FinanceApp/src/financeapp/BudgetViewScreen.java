@@ -6,11 +6,14 @@
 
 package financeapp;
 
+import javax.swing.*;
+import java.awt.event.*;
+
 /**
  *
  * @author mhilaire
  */
-public class BudgetViewScreen extends javax.swing.JFrame {
+public class BudgetViewScreen extends JFrame {
 
     UIController controller = new UIController();
     
