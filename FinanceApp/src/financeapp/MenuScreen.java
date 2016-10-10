@@ -105,7 +105,7 @@ public class MenuScreen extends JFrame {
     
     private class SettingsButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-           Settings settings = new Settings(); 
+           SettingsScreen settings = new SettingsScreen(); 
         }
     }
 }
