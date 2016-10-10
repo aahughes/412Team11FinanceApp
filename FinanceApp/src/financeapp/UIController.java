@@ -11,8 +11,29 @@ package financeapp;
  */
 public class UIController {
     MenuScreen menu = new MenuScreen();
+    BudgetViewScreen budgetview = new BudgetViewScreen();
+    SettingsScreen settings = new SettingsScreen();
+    //TransactionHistoryScreen transactions = new TransactionHistoryScreen();
     
+    public void openMenu(){
+        menu.setVisible(true);
+        budgetview.setVisible(false);
+        settings.setVisible(false);
+    }
     
+    public void openBudgetview(){
+        budgetview.setVisible(true);
+        menu.setVisible(false);
+    }
     
+    public void openSettings(){
+        settings.setVisible(true);
+        menu.setVisible(false);
+    }
+    
+    public void openTransactionHistory(){
+        //transactions.setVisible(true);
+        menu.setVisible(false);
+    }
     
 }

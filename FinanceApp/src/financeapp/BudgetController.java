@@ -22,28 +22,23 @@ public class BudgetController {
         Budgets newbudget = new Budgets();
         newbudget.setCategory(category);
         newbudget.setAmount(amount);
-        newbudget.setBalance(balance);
-                
-        controller.create(newbudget);
-        
+        newbudget.setBalance(balance);                
+        controller.create(newbudget);        
     }
     
     public void setBudgetAmount(String category, Double amount) throws Exception{
         Budgets budget = controller.findBudgets(category);
-        budget.setAmount(amount);
-        
+        budget.setAmount(amount);        
         controller.edit(budget);
     }
     
-    public void setBudgetBalance(String category, Double balance) throws Exception{
-        
+    public void setBudgetBalance(String category, Double balance) throws Exception{    
         Budgets budget = controller.findBudgets(category);
         budget.setBalance(balance);
-
         controller.edit(budget);
     }
     
     public Budgets getBudget(String category){
-        return controller.findBudgets(category);        
+        return controller.findBudgets(category);     
     }
 }

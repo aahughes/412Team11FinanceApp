@@ -22,7 +22,7 @@ public class MenuScreen extends JFrame {
     private JLabel label;
     private JButton balance;
     private JButton history;
-    private JButton withdrawlDeposit;
+    private JButton withdrawalDeposit;
     private JButton settings;
     private final int WINDOW_WIDTH = 200;
     private final int WINDOW_HEIGHT = 300;
@@ -41,13 +41,13 @@ public class MenuScreen extends JFrame {
         // Creating the four buttons.
         balance = new JButton("Balance");
         history = new JButton("History");
-        withdrawlDeposit = new JButton("Withdrawl/Deposit");
+        withdrawalDeposit = new JButton("Withdrawal/Deposit");
         settings = new JButton("Settings");
         
         // Registering an event listener with all 4 buttons.
         balance.addActionListener(new BalanceButtonListener());
         history.addActionListener(new HistoryButtonListener());
-        withdrawlDeposit.addActionListener(new WithdrawlDepositButtonListener());
+        withdrawalDeposit.addActionListener(new WithdrawalDepositButtonListener());
         settings.addActionListener(new SettingsButtonListener());
         
         // Creating the panel and adding the components to it.
@@ -55,7 +55,7 @@ public class MenuScreen extends JFrame {
         panel.add(label);
         panel.add(balance);
         panel.add(history);
-        panel.add(withdrawlDeposit);
+        panel.add(withdrawalDeposit);
         panel.add(settings);
         
         // Adding the panel to the frame.
@@ -89,10 +89,10 @@ public class MenuScreen extends JFrame {
     
     /**
      * Private inner class that handles event
-     * when the user clicks the Withdrawl/Deposit button.
+     * when the user clicks the Withdrawal/Deposit button.
      */
     
-    private class WithdrawlDepositButtonListener implements ActionListener {
+    private class WithdrawalDepositButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
             
         }
