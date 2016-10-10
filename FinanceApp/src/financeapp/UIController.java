@@ -13,7 +13,7 @@ public class UIController {
     MenuScreen menu = new MenuScreen();
     BudgetViewScreen budgetview = new BudgetViewScreen();
     SettingsScreen settings = new SettingsScreen();
-    //TransactionHistoryScreen transactions = new TransactionHistoryScreen();
+    TransactionEntryScreen transactionentry = new TransactionEntryScreen();
     
     public void openMenu(){
         menu.setVisible(true);
@@ -31,8 +31,8 @@ public class UIController {
         menu.setVisible(false);
     }
     
-    public void openTransactionHistory(){
-        //transactions.setVisible(true);
+    public void openTransactionEntry(){
+        transactionentry.setVisible(true);
         menu.setVisible(false);
     }
     
