@@ -15,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,6 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "BUDGETS")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Budgets.findAll", query = "SELECT b FROM Budgets b"),
     @NamedQuery(name = "Budgets.findByCategory", query = "SELECT b FROM Budgets b WHERE b.category = :category"),
@@ -79,6 +82,7 @@ public class Budgets implements Serializable {
         this.balance = balance;
     }
 
+    @XmlTransient
     public Collection<Transactions> getTransactionsCollection() {
         return transactionsCollection;
     }
@@ -109,7 +113,7 @@ public class Budgets implements Serializable {
 
     @Override
     public String toString() {
-        return category;
+        return "financeapp.Budgets[ category=" + category + " ]";
     }
     
 }

@@ -26,7 +26,7 @@ public class MenuScreen extends JPanel {
     private JButton transactionHistoryButton;
     private JButton settingsButton;
     private final int WINDOW_WIDTH = 400;
-    private final int WINDOW_HEIGHT = 300;
+    private final int WINDOW_HEIGHT = 400;
     
     AppFrame frame;
     

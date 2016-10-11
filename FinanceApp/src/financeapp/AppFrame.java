@@ -19,7 +19,7 @@ public class AppFrame extends JFrame {
     
     
     private final int WINDOW_WIDTH = 400;
-    private final int WINDOW_HEIGHT = 300;
+    private final int WINDOW_HEIGHT = 400;
     
     MenuScreen menu;
     BudgetViewScreen budgetview;
@@ -53,30 +53,32 @@ public class AppFrame extends JFrame {
         this.setContentPane(menu);
         //this.setSize(menu.getSize());
         this.repaint();
+        this.setVisible(true);
     }
     
     public void openBudgetView(){
-        this.setContentPane(budgetview);
-        this.repaint();
+        //openPanel(budgetview);
     }
     
      public void openBudgetEntry(){
-        //this.setContentPane(budgetentry);
-        this.repaint();
+        //openPanel(budgetentry);
     }
     
     public void openSettings(){
-        this.setContentPane(settings);
-        this.repaint();
+        openPanel(settings);
     }
     
     public void openTransactionEntry(){
-        this.setContentPane(transactionentry);
-        this.repaint();
+        openPanel(transactionentry);
     }
     
     public void openTransactionHistory(){
-        //this.setContentPane(transactionhistory);
+        //openPanel(transactionhistory);
+    }
+    
+    public void openPanel(JComponent content){
+        this.setContentPane(content);
         this.repaint();
+        this.setVisible(true);
     }
 }

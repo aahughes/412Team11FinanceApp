@@ -34,7 +34,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
      */
     public TransactionEntryScreen(AppFrame theframe) {
         this.frame = theframe;
-        
+        this.setSize(400, 400);
         initComponents();
     }
 
@@ -60,7 +60,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
-        jButton1.setText("Exit");
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

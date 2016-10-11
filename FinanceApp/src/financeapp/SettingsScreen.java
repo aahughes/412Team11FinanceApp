@@ -27,7 +27,7 @@ public class SettingsScreen extends JPanel {
     private JButton menuButton;
     private JButton saveButton;
     private final int WINDOW_WIDTH = 400;
-    private final int WINDOW_HEIGHT = 300;
+    private final int WINDOW_HEIGHT = 400;
     
     /**
      * Constructor
