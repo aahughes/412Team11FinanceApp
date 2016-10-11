@@ -19,7 +19,7 @@ public class TransactionController {
     TransactionsJpaController controller = new TransactionsJpaController(emf);
     BudgetsJpaController budgets = new BudgetsJpaController(emf);
     
-    int transactionID = 0;
+    int transactionID = controller.getTransactionsCount();
     
     public void addTransaction(String name, String category, Double amount, Date date) throws Exception{
         Transactions newtransaction = new Transactions();

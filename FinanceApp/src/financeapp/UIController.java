@@ -19,6 +19,7 @@ public class UIController {
         menu.setVisible(true);
         budgetview.setVisible(false);
         settings.setVisible(false);
+        transactionentry.setVisible(false);
     }
     
     public void openBudgetview(){
