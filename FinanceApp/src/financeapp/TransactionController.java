@@ -15,11 +15,19 @@ import javax.persistence.Persistence;
  */
 public class TransactionController {
     
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("FinanceAppPU");
-    TransactionsJpaController controller = new TransactionsJpaController(emf);
-    BudgetsJpaController budgets = new BudgetsJpaController(emf);
+    EntityManagerFactory emf;
+    TransactionsJpaController controller;
+    BudgetsJpaController budgets;
+    int transactionID;
     
-    int transactionID = controller.getTransactionsCount();
+    
+
+    public TransactionController() {
+        this.emf = Persistence.createEntityManagerFactory("FinanceAppPU");
+        this.budgets = new BudgetsJpaController(emf);
+        this.controller = new TransactionsJpaController(emf);
+        transactionID = controller.getTransactionsCount();
+    }
     
     public void addTransaction(String name, String category, Double amount, Date date) throws Exception{
         Transactions newtransaction = new Transactions();

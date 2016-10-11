@@ -17,25 +17,30 @@ import java.awt.event.*;
  * first opening the application.
  */
 
-public class MenuScreen extends JFrame {
-    private JPanel panel;
+public class MenuScreen extends JPanel {
+    
     private JLabel label;
     private JButton budgetButton;
     private JButton budgetEntryButton;
     private JButton transactionEntryButton;
     private JButton transactionHistoryButton;
     private JButton settingsButton;
-    private final int WINDOW_WIDTH = 200;
+    private final int WINDOW_WIDTH = 400;
     private final int WINDOW_HEIGHT = 300;
+    
+    AppFrame frame;
     
     /**
      * Constructor
      */
     
-    public MenuScreen(){
-        setTitle("Menu");
+    public MenuScreen (AppFrame theframe){
+        
+        this.frame = theframe;
+        
+        //setTitle("Menu");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         label = new JLabel("Welcome to Finance App");
         
@@ -53,18 +58,14 @@ public class MenuScreen extends JFrame {
         transactionHistoryButton.addActionListener(new TransactionHistoryButtonListener());
         settingsButton.addActionListener(new SettingsButtonListener());
         
-        // Creating the panel and adding the components to it.
-        panel = new JPanel();
-        panel.add(label);
-        panel.add(budgetButton);
-        panel.add(budgetEntryButton);
-        panel.add(transactionEntryButton);
-        panel.add(transactionHistoryButton);
-        panel.add(settingsButton);
-        
-        // Adding the panel to the frame.
-        add(panel);
-        
+        // Adding the components to this panel.
+        this.add(label);
+        this.add(budgetButton);
+        this.add(budgetEntryButton);
+        this.add(transactionEntryButton);
+        this.add(transactionHistoryButton);
+        this.add(settingsButton);
+      
         // Displaying the window.
         setVisible(true);
     }
@@ -76,7 +77,7 @@ public class MenuScreen extends JFrame {
     
     private class BudgetButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-           //BudgetViewScreen budgetViewScreen = new BudgetViewScreen();
+           frame.openBudgetView();
         }
     }
     
@@ -87,7 +88,7 @@ public class MenuScreen extends JFrame {
     
     private class BudgetEntryButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-           
+           frame.openBudgetEntry();
         }
     }
     
@@ -98,7 +99,7 @@ public class MenuScreen extends JFrame {
     
     private class TransactionEntryButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-            TransactionEntry transactionEntry = new TransactionEntry();
+            frame.openTransactionEntry();
         }
     }
     
@@ -109,11 +110,10 @@ public class MenuScreen extends JFrame {
     
     private class TransactionHistoryButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-            
+            frame.openTransactionHistory();
         }
     }
-    
-    
+        
     /**
      * Private inner class that handles event
      * when the user clicks the Settings button.
@@ -121,7 +121,7 @@ public class MenuScreen extends JFrame {
     
     private class SettingsButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-           SettingsScreen settings = new SettingsScreen(); 
+           frame.openSettings();
         }
     }
 }

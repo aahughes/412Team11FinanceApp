@@ -9,11 +9,17 @@ package financeapp;
 // airon1995@gmail.com
 // 10-Oct-16
 
+
+// some refactoring/edits by aahughes
+// 10-Oct-16
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class SettingsScreen extends JFrame {
-    private JPanel panel;
+public class SettingsScreen extends JPanel {
+    
+    public AppFrame frame;
+    
     private JLabel budgetLabel;
     private JTextField budgetTextField;
     private JLabel alertLabel;
@@ -25,11 +31,14 @@ public class SettingsScreen extends JFrame {
     
     /**
      * Constructor
+     * @param theframe
      */
     
-    public SettingsScreen(){
-        setTitle("Settings");
+    public SettingsScreen(AppFrame theframe){
+        //setTitle("Settings");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        
+        this.frame = theframe;
         
         budgetLabel = new JLabel("Monthly Budget : ");
         budgetTextField = new JTextField(10);
@@ -41,17 +50,14 @@ public class SettingsScreen extends JFrame {
         menuButton.addActionListener(new MenuButtonListener());
         saveButton.addActionListener(new SaveButtonListener());
         
-        panel = new JPanel();
-        panel.add(budgetLabel);
-        panel.add(budgetTextField);
-        panel.add(alertLabel);
-        panel.add(alertTextField);
-        panel.add(menuButton);
-        panel.add(saveButton);
+        this.add(budgetLabel);
+        this.add(budgetTextField);
+        this.add(alertLabel);
+        this.add(alertTextField);
+        this.add(menuButton);
+        this.add(saveButton);
         
-        add(panel);
-        
-        setVisible(true);
+        //setVisible(true);
     }
     
      /**
@@ -61,7 +67,7 @@ public class SettingsScreen extends JFrame {
     
      private class MenuButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-           
+           frame.openMenu();
         }
     }
     

@@ -5,6 +5,8 @@
  */
 package financeapp;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Allison
@@ -16,10 +18,8 @@ public class FinanceApp {
      */
     public static void main(String[] args) {
         
-        MenuScreen menu = new MenuScreen();
-
-        menu.setVisible(true);
-        
+        JFrame frame = new AppFrame();
+        frame.setVisible(true);
     }
     
 }
