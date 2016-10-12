@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Transactions.findById", query = "SELECT t FROM Transactions t WHERE t.id = :id"),
     @NamedQuery(name = "Transactions.findByName", query = "SELECT t FROM Transactions t WHERE t.name = :name"),
     @NamedQuery(name = "Transactions.findByAmount", query = "SELECT t FROM Transactions t WHERE t.amount = :amount"),
-    @NamedQuery(name = "Transactions.findByDate", query = "SELECT t FROM Transactions t WHERE t.date = :date")})
+    @NamedQuery(name = "Transactions.findByDate", query = "SELECT t FROM Transactions t WHERE t.date = :date"),
+    @NamedQuery(name = "Transactions.findByDateRange", query = "SELECT t FROM Transactions t WHERE t.date BETWEEN ?1 AND ?2")})
 public class Transactions implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

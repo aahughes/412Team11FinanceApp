@@ -38,6 +38,8 @@ public class BudgetController {
         controller.edit(budget);
     }
     
+    
+    // Get budget by category
     public Budgets getBudget(String category){
         return controller.findBudgets(category);     
     }

@@ -31,6 +31,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     
     /**
      * Creates new form TransactionEntryPanel
+     * @param theframe
      */
     public TransactionEntryScreen(AppFrame theframe) {
         this.frame = theframe;

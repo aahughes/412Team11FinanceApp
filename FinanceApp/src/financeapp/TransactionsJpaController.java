@@ -8,6 +8,7 @@ package financeapp;
 import financeapp.exceptions.NonexistentEntityException;
 import financeapp.exceptions.PreexistingEntityException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -155,6 +156,30 @@ public class TransactionsJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Transactions> findTransactionsByDate(Date date) {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNamedQuery("Transactions.findByDate");
+            q.setParameter("date", date);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Transactions> findTransactionsByDateRange(Date date1, Date date2) {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNamedQuery("Transactions.findByDateRange");
+            q.setParameter(1,date1);
+            q.setParameter(2,date2);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
 
     public int getTransactionsCount() {
         EntityManager em = getEntityManager();
