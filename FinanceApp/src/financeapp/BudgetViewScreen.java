@@ -15,12 +15,15 @@ import java.awt.event.*;
  */
 public class BudgetViewScreen extends JFrame {
 
-    UIController controller = new UIController();
+    AppFrame frame;
+    
     
     /**
      * Creates new form BudgetViewScreen
      */
-    public BudgetViewScreen() {
+    public BudgetViewScreen(AppFrame theframe) {
+        this.frame = theframe;
+        
         initComponents();
     }
 
@@ -145,7 +148,7 @@ public class BudgetViewScreen extends JFrame {
     
     // Back Button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.openMenu();
+        frame.openMenu();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -178,7 +181,7 @@ public class BudgetViewScreen extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BudgetViewScreen().setVisible(true);
+                //new BudgetViewScreen().setVisible(true);
             }
         });
     }

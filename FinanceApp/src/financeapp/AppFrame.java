@@ -5,7 +5,7 @@
  */
 package financeapp;
 
-import java.awt.CardLayout;
+
 import javax.swing.*;
 
 /**
@@ -36,9 +36,7 @@ public class AppFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         this.setLocationRelativeTo(null);
-        
-        this.setLayout(new CardLayout());
-        
+                
         menu = new MenuScreen(this);
         //budgetview = new BudgetViewScreen(this);
         settings = new SettingsScreen(this);
