@@ -53,6 +53,10 @@ public class TransactionControllerTest {
         cal.set(2016, 9, 10);
         Date date = cal.getTime();
         TransactionController instance = new TransactionController();
+        
+        BudgetController budgets = new BudgetController();
+        budgets.addBudget(category, 100.00, 100.00);
+        
         instance.addTransaction(name, category, Amount, date);
         
         Transactions test = instance.controller.findTransactions(0);
@@ -61,12 +65,15 @@ public class TransactionControllerTest {
         String expectedCat = "Food";
         double expectedAmt = 10.00;
         Date expectedDate = cal.getTime();
+        double expectedBalance = 90.00;
         
         Assert.assertEquals(expectedName, test.getName());
         Assert.assertEquals(expectedCat, test.getCategoryFk().toString());
         Assert.assertEquals(expectedCat, instance.budgets.findBudgets(category).toString());
         Assert.assertEquals(expectedAmt, test.getAmount()); 
         Assert.assertEquals(expectedDate.toString(), test.getDate().toString());
+        
+        Assert.assertEquals(expectedBalance,instance.budgets.findBudgets(category).getBalance());
         
         Assert.assertTrue(instance.budgets.findBudgets(category).getTransactionsCollection().contains(test));
     }
