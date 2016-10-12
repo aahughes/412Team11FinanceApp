@@ -25,7 +25,7 @@ public class AppFrame extends JFrame {
     BudgetViewScreen budgetview;
     SettingsScreen settings;
     TransactionEntryScreen transactionentry;
-    //TransactionHistoryScreen transactionhistory;
+    TransactionHistoryScreen transactionhistory;
     BudgetEntryScreen budgetentry;
     
     
@@ -41,7 +41,7 @@ public class AppFrame extends JFrame {
         //budgetview = new BudgetViewScreen(this);
         settings = new SettingsScreen(this);
         transactionentry = new TransactionEntryScreen(this);
-        //transactionhistory = new TransactionHistoryScreen(this);
+        transactionhistory = new TransactionHistoryScreen(this);
         budgetentry = new BudgetEntryScreen(this);
         
         this.add(menu);
@@ -71,7 +71,7 @@ public class AppFrame extends JFrame {
     }
     
     public void openTransactionHistory(){
-        //openPanel(transactionhistory);
+        openPanel(transactionhistory);
     }
     
     public void openPanel(JComponent content){
