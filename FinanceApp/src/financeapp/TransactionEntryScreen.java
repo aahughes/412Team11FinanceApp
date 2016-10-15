@@ -205,12 +205,13 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        day = (int)jComboBox1.getSelectedItem();
+        String dayString = jComboBox1.getSelectedItem().toString();
+        day = Integer.valueOf(dayString);
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        month = (int)jComboBox2.getSelectedItem();
+        month = Integer.valueOf(jComboBox2.getSelectedItem().toString());
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
 

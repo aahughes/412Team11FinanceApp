@@ -11,23 +11,38 @@ package financeapp;
  * @author mhilaire
  */
 public class Budget {
-    private String categoryName;
     private double amount;
     private double balance;
-    private double remainingBalance;
+    private double budgetAlert;
     
-    public Budget (String newCategoryName, double newAmount, double newBalance, double newRemainingBalance) {
-        categoryName = newCategoryName;
-        amount = newAmount;
+    public Budget (double newAmount, double newBalance, double newAlert) {
+        this.amount = newAmount;
+        this.balance = newBalance;
+        this.budgetAlert = newAlert;
+    }
+    
+    
+    public void setBalance(double newBalance){
         balance = newBalance;
-        remainingBalance = newRemainingBalance;
+    }
+    public double getBalance(){
+        return balance;
     }
     
-    public void setRemainingBalance(double newRemainingBalance){
-        remainingBalance = newRemainingBalance;
+    public double getAlert(){
+        return budgetAlert;
     }
-    public double getRemainingBalance(){
-        return remainingBalance;
+    
+    public void setAlert(double newAlert){
+        budgetAlert = newAlert;
+    }
+    
+    public double getAmount(){
+        return amount;
+    }
+    
+    public void setAmount(double newAmount){
+        amount = newAmount;
     }
     
 }

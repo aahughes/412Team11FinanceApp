@@ -14,10 +14,18 @@ import javax.persistence.Persistence;
  */
 public class BudgetController {
     
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("FinanceAppPU");
-    BudgetsJpaController controller = new BudgetsJpaController(emf);
+    Budget totalBudget;
+    EntityManagerFactory emf;
+    BudgetsJpaController controller;
     
+    public BudgetController(){
+        
+        emf = Persistence.createEntityManagerFactory("FinanceAppPU");
+        controller = new BudgetsJpaController(emf);
+        
+        totalBudget = new Budget(100.00,100.00,20.00);
     
+    }
     public void addBudget(String category, Double amount, Double balance) throws Exception{
         Budgets newbudget = new Budgets();
         newbudget.setCategory(category);
