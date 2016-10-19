@@ -5,6 +5,9 @@
  */
 package financeapp;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -50,5 +53,16 @@ public class BudgetController {
     // Get budget by category
     public Budgets getBudget(String category){
         return controller.findBudgets(category);     
+    }
+    
+    public String[] getBudgetNames(){
+        ArrayList<String> names = new ArrayList<>();
+        
+        List<Budgets> budgets = controller.findBudgetsEntities();
+        for (Budgets budget : budgets) {
+            names.add(budget.getCategory());
+        }
+        
+        return (String[]) names.toArray();
     }
 }
