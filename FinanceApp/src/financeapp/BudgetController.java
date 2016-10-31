@@ -52,6 +52,18 @@ public class BudgetController {
         return budgets.keySet();
     }
     
+    // Get arraylist of category names
+    public ArrayList<String> getBudgetNameList(){
+        Set<String> set = budgets.keySet();
+        ArrayList<String> names = new ArrayList();
+        for (String name : set){
+            names.add(name);
+        }
+        
+        return names;
+    }
+    
+    
     // Get list of budgets
     public ArrayList<Budget> getBudgetList(){
         return (ArrayList<Budget>) budgets.values();

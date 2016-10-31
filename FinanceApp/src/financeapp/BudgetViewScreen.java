@@ -34,12 +34,16 @@ public class BudgetViewScreen extends javax.swing.JPanel {
     public BudgetViewScreen(AppFrame theframe) {
         this.frame = theframe;
         
-        Set<String> nameset = frame.controller.getBudgetNames();
-        for (String name : nameset){
-            namelist.add(name);
-        }
-        names = new String[namelist.size()];
-
+        namelist = frame.controller.getBudgetNameList();
+        
+        int size = namelist.size();
+        names = new String[size];
+        
+        namelist.toArray(names);
+        
+        //debug
+        System.out.println(namelist.toString());
+       
         initComponents();
     }
 
@@ -252,13 +256,13 @@ public class BudgetViewScreen extends javax.swing.JPanel {
         tableModel.addColumn("Date");
         
         tableModel.setRowCount(transactions.size());
-        int row = 1;
+        int row = 0;
         //Scroll through transactions
         
         for (Transaction t : transactions){
-            tableModel.setValueAt(t.getName(), row, 1);
-            tableModel.setValueAt(t.getAmount(), row, 2);
-            tableModel.setValueAt(t.getDate(), row, 3);
+            tableModel.setValueAt(t.getName(), row, 0);
+            tableModel.setValueAt(t.getAmount(), row, 1);
+            tableModel.setValueAt(t.getDate(), row, 2);
             row++;
         }
 

@@ -42,10 +42,8 @@ public class AppFrame extends JFrame {
         controller = new BudgetController();
                 
         menu = new MenuScreen(this);
-        budgetview = new BudgetViewScreen(this);
-        settings = new SettingsScreen(this,controller.totalBudget.getAmount(),controller.totalBudget.getAlert());
         transactionentry = new TransactionEntryScreen(this);
-        transactionhistory = new TransactionHistoryScreen(this);
+        
         budgetentry = new BudgetEntryScreen(this);
         
         this.add(menu);
@@ -59,6 +57,7 @@ public class AppFrame extends JFrame {
     }
     
     public void openBudgetView(){
+        budgetview = new BudgetViewScreen(this);
         openPanel(budgetview);
     }
     
@@ -67,6 +66,7 @@ public class AppFrame extends JFrame {
     }
     
     public void openSettings(){
+        settings = new SettingsScreen(this,controller.totalBudget.getAmount(),controller.totalBudget.getAlert());
         openPanel(settings);
     }
     
@@ -75,6 +75,7 @@ public class AppFrame extends JFrame {
     }
     
     public void openTransactionHistory(){
+        transactionhistory = new TransactionHistoryScreen(this);
         openPanel(transactionhistory);
     }
     
