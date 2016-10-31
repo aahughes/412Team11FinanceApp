@@ -20,7 +20,7 @@ public class BudgetEntryScreen extends javax.swing.JPanel {
     Double amount;
     Double balance;
     
-    BudgetController controller = new BudgetController();
+    BudgetController controller;
     
     
     /**
@@ -29,6 +29,7 @@ public class BudgetEntryScreen extends javax.swing.JPanel {
      */
     public BudgetEntryScreen(AppFrame theframe) {
         this.frame = theframe;
+        controller = frame.controller;
         initComponents();
     }
 
@@ -178,6 +179,9 @@ public class BudgetEntryScreen extends javax.swing.JPanel {
             try {
                 controller.addBudget(category, amount, balance);
                 JOptionPane.showMessageDialog(null, "Budget Saved.");
+                
+                //debug
+                System.out.println(category + " " + controller.getBudget(category).getAmount() + " " + controller.getBudget(category).getBalance());
                 
             } catch (Exception ex) {
                 Logger.getLogger(BudgetEntryScreen.class.getName()).log(Level.SEVERE, null, ex);

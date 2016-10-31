@@ -42,7 +42,7 @@ public class BudgetControllerTest {
      * Test of addBudget method, of class BudgetController.
      */
     @Test
-    public void testAddBudget() throws Exception {
+    public void testAddBudget() {
         System.out.println("addBudget");
         String category = "Food";
         Double amount = 100.00;
@@ -50,7 +50,7 @@ public class BudgetControllerTest {
         BudgetController instance = new BudgetController();
         instance.addBudget(category, amount, balance);
         
-        Budgets testBudget = instance.controller.findBudgets(category);
+        Budget testBudget = instance.getBudget(category);
         
         String expectedstring = "Food";
         double expecteddouble = 100.00;
@@ -65,14 +65,14 @@ public class BudgetControllerTest {
      * Test of setBudgetAmount method, of class BudgetController.
      */
     @Test
-    public void testSetBudgetAmount() throws Exception {
+    public void testSetBudgetAmount() {
         System.out.println("setBudgetAmount");
         String category = "Food";
         Double amount = 100.00;
         BudgetController instance = new BudgetController();
         instance.setBudgetAmount(category, amount);
 
-        Budgets testBudget = instance.controller.findBudgets(category);
+        Budget testBudget = instance.getBudget(category);
         
         String expectedstring = "Food";
         double expecteddouble = 100.00;
@@ -85,14 +85,14 @@ public class BudgetControllerTest {
      * Test of setBudgetBalance method, of class BudgetController.
      */
     @Test
-    public void testSetBudgetBalance() throws Exception {
+    public void testSetBudgetBalance() {
         System.out.println("setBudgetBalance");
         String category = "Food";
         Double balance = 100.00;
         BudgetController instance = new BudgetController();
         instance.setBudgetBalance(category, balance);
         
-        Budgets testBudget = instance.controller.findBudgets(category);
+        Budget testBudget = instance.getBudget(category);
         
         String expectedstring = "Food";
         double expecteddouble = 100.00;

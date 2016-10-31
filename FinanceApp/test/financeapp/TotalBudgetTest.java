@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author mhilaire
  */
-public class BudgetTest {
+public class TotalBudgetTest {
     
-    public BudgetTest() {
+    public TotalBudgetTest() {
     }
     
     @BeforeClass
@@ -29,29 +29,30 @@ public class BudgetTest {
     }
 
     /**
-     * Test of setRemainingBudget method, of class Budget.
+     * Test of setRemainingBudget method, of class TotalBudget.
      */
     @Test
     public void testSetRemainingBalance() {
         System.out.println("setRemainingBudget");
-        double remainingBudget = 0.0;
-        Budget instance = new Budget("Test",0.0,0.0,0.0);
-        double expResult = 0.0;
-        double result = instance.getRemainingBalance();
-        assertEquals(expResult, result, 0.0);
+        double remainingBudget = 100.0;
+        TotalBudget instance = new TotalBudget(0.0,0.0,0.0);
+        double expResult = 100.0;
+        instance.setBalance(remainingBudget);
+        double result = instance.getBalance();
+        assertEquals(expResult, result, 100.0);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getRemainingBudget method, of class Budget.
+     * Test of getRemainingBudget method, of class TotalBudget.
      */
     @Test
     public void testGetRemainingBalance() {
         System.out.println("getRemainingBudget");
-        Budget instance = new Budget("Test",0.0,0.0,0.0);
+        TotalBudget instance = new TotalBudget(0.0,0.0,0.0);
         double expResult = 0.0;
-        double result = instance.getRemainingBalance();
+        double result = instance.getBalance();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

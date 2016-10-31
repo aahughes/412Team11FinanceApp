@@ -11,26 +11,34 @@ import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author mhilaire
+ * @author mhilaire, aahughes
  */
 public class BudgetViewScreen extends javax.swing.JPanel {
 
     public AppFrame frame;
+    ArrayList<String> namelist;
     String[] names;
-    ResultSet rs;
+    TransactionList transactions;
     /**
      * Creates new form BudgetViewScreen
+     * @param theframe
      */
     public BudgetViewScreen(AppFrame theframe) {
         this.frame = theframe;
         
-        names = frame.controller.getBudgetNames();
+        Set<String> nameset = frame.controller.getBudgetNames();
+        for (String name : nameset){
+            namelist.add(name);
+        }
+        names = new String[namelist.size()];
 
         initComponents();
     }
@@ -215,12 +223,8 @@ public class BudgetViewScreen extends javax.swing.JPanel {
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
         String name = (String) nameBox.getSelectedItem();
-        rs = (ResultSet) frame.transcontroller.getTransactionsByCategory(name);
-        try {
-            resultSetToTableModel(rs,table);
-        } catch (SQLException ex) {
-            Logger.getLogger(BudgetViewScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        transactions = frame.controller.getBudget(name).getTransactionList();
+        updateTableModel(transactions);
         
         String amount = Double.toString(frame.controller.getBudget(name).getAmount());
         String remaining = Double.toString(frame.controller.getBudget(name).getBalance());
@@ -235,48 +239,32 @@ public class BudgetViewScreen extends javax.swing.JPanel {
 
     
     
-    /////
-    /////
-    /*
-    Code credit
-      http://stackoverflow.com/users/3617631/zoka
-            
-    */    
-    public void resultSetToTableModel(ResultSet rs, JTable table) throws SQLException{
+     
+    public void updateTableModel(TransactionList transactions){
         //Create new table model
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        //Retrieve meta data from ResultSet
-        ResultSetMetaData metaData = rs.getMetaData();
-
-        //Get number of columns from meta data
-        //int columnCount = metaData.getColumnCount();
-
         int columnCount = 3;
         
-        //Get all column names from meta data and add columns to table model
-        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
-            tableModel.addColumn(metaData.getColumnLabel(columnIndex));
-        }
-
-        //Create array of Objects with size of column count from meta data
-        Object[] row = new Object[columnCount];
-
-        //Scroll through result set
-        while (rs.next()){
-            //Get object from column with specific index of result set to array of objects
-            for (int i = 0; i < columnCount; i++){
-                row[i] = rs.getObject(i+1);
-            }
-            //Now add row to table model with that array of objects as an argument
-            tableModel.addRow(row);
+        
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Amount");
+        tableModel.addColumn("Date");
+        
+        tableModel.setRowCount(transactions.size());
+        int row = 1;
+        //Scroll through transactions
+        
+        for (Transaction t : transactions){
+            tableModel.setValueAt(t.getName(), row, 1);
+            tableModel.setValueAt(t.getAmount(), row, 2);
+            tableModel.setValueAt(t.getDate(), row, 3);
+            row++;
         }
 
         //Now add that table model to your table and you are done :D
         table.setModel(tableModel);
     }
-    /////
-    /////
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountBox;

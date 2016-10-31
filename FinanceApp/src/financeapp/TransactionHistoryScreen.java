@@ -5,12 +5,14 @@
  */
 package financeapp;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -22,19 +24,25 @@ import javax.swing.table.DefaultTableModel;
 public class TransactionHistoryScreen extends javax.swing.JPanel {
 
     AppFrame frame;
-    ResultSet rs;
+    
     Date date1;
     Date date2;
-    Calendar cal;
+    LocalDate now;
+    
+    ArrayList<TransactionList> transactionlists;
+    List<LocalDate> dates;
+    TransactionList datedTransactions;
     
     /**
      * Creates new form TransactionHistoryScreen1
      * @param theframe
      */
     public TransactionHistoryScreen(AppFrame theframe) {
-        this.cal = Calendar.getInstance();
         this.frame = theframe;
-        date1 = (Date) cal.getTime();
+        
+        transactionlists = frame.controller.getTransactionLists();
+        
+        now = LocalDate.now();
         
         initComponents();
     }
@@ -52,7 +60,7 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         timeFrameList = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -77,7 +85,12 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Transaction History");
 
-        jButton3.setText("Back");
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         timeFrameList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Last Week", "Last Month", "Last 6 Months" }));
         timeFrameList.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +130,7 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
                         .addComponent(timeFrameList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(158, 158, 158)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -135,7 +148,7 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(backButton)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -143,73 +156,65 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
     private void timeFrameListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeFrameListActionPerformed
         String selected = timeFrameList.getSelectedItem().toString();
         
-        Calendar calTemp = (Calendar) cal.clone();
-        
+        LocalDate then = now;
         
         switch (selected) {
-            case "Last Month": calTemp.add(Calendar.MONTH,-1);
+            case "Last Month": then.minusMonths(1);
                 break;
-            case "Last 6 Months": calTemp.add(Calendar.MONTH, -6);
+            case "Last 6 Months": then.minusMonths(6);
                 break;
-            default: calTemp.add(Calendar.DAY_OF_YEAR, -7);
+            default: then.minusWeeks(1);
                 break;
         }
         
-        date2 = (Date) calTemp.getTime();
+       
+        date1 = Date.valueOf(now);
+        date2 = Date.valueOf(then);
         
-        rs = (ResultSet) frame.transcontroller.getTransactionsByDateRange(date2, date1);
+        datedTransactions = new TransactionList();
         
-        try {
-            resultSetToTableModel(rs,table);
-        } catch (SQLException ex) {
-            Logger.getLogger(TransactionHistoryScreen.class.getName()).log(Level.SEVERE, null, ex);
+        for (TransactionList t : transactionlists){
+            datedTransactions.addAll(t.getTransactionsByDateRange(now, then));
         }
+        
+                
+        updateTableModel(datedTransactions);
+        
     }//GEN-LAST:event_timeFrameListActionPerformed
 
-    /////
-    /////
-    /*
-    Code credit
-      http://stackoverflow.com/users/3617631/zoka
-            
-    */    
-    public void resultSetToTableModel(ResultSet rs, JTable table) throws SQLException{
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        frame.openMenu();
+    }//GEN-LAST:event_backButtonActionPerformed
+
+     public void updateTableModel(TransactionList transactions){
         //Create new table model
         DefaultTableModel tableModel = new DefaultTableModel();
 
-        //Retrieve meta data from ResultSet
-        ResultSetMetaData metaData = rs.getMetaData();
-
-        //Get number of columns from meta data
-        int columnCount = metaData.getColumnCount();
-
-        //Get all column names from meta data and add columns to table model
-        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++){
-            tableModel.addColumn(metaData.getColumnLabel(columnIndex));
-        }
-
-        //Create array of Objects with size of column count from meta data
-        Object[] row = new Object[columnCount];
-
-        //Scroll through result set
-        while (rs.next()){
-            //Get object from column with specific index of result set to array of objects
-            for (int i = 0; i < columnCount; i++){
-                row[i] = rs.getObject(i+1);
-            }
-            //Now add row to table model with that array of objects as an argument
-            tableModel.addRow(row);
+        int columnCount = 3;
+        
+        
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Amount");
+        tableModel.addColumn("Date");
+        
+        tableModel.setRowCount(transactions.size());
+        int row = 1;
+        //Scroll through transactions
+        
+        for (Transaction t : transactions){
+            tableModel.setValueAt(t.getName(), row, 1);
+            tableModel.setValueAt(t.getAmount(), row, 2);
+            tableModel.setValueAt(t.getDate(), row, 3);
+            row++;
         }
 
         //Now add that table model to your table and you are done :D
         table.setModel(tableModel);
     }
-    /////
-    /////
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

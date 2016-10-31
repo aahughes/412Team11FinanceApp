@@ -29,7 +29,6 @@ public class AppFrame extends JFrame {
     BudgetEntryScreen budgetentry;
     
     BudgetController controller;
-    TransactionController transcontroller;
     
     
 
@@ -41,10 +40,9 @@ public class AppFrame extends JFrame {
         this.setLocationRelativeTo(null);
         
         controller = new BudgetController();
-        transcontroller = new TransactionController();
                 
         menu = new MenuScreen(this);
-        //budgetview = new BudgetViewScreen(this);
+        budgetview = new BudgetViewScreen(this);
         settings = new SettingsScreen(this,controller.totalBudget.getAmount(),controller.totalBudget.getAlert());
         transactionentry = new TransactionEntryScreen(this);
         transactionhistory = new TransactionHistoryScreen(this);
@@ -61,7 +59,7 @@ public class AppFrame extends JFrame {
     }
     
     public void openBudgetView(){
-        //openPanel(budgetview);
+        openPanel(budgetview);
     }
     
      public void openBudgetEntry(){
