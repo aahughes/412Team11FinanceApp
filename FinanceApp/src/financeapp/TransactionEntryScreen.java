@@ -40,9 +40,14 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         this.controller = frame.controller;
         this.setSize(400, 400);
         
-        this.day = 1;
-        this.month = 1;
-        this.year = 2016;
+        LocalDate now = LocalDate.now();
+        
+        
+        this.day = now.getDayOfMonth();
+        this.month = now.getMonthValue();
+        this.year = now.getYear();
+        
+                
         initComponents();
     }
 
@@ -83,9 +88,11 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setText("Year");
+        jTextField1.setText(Integer.toString(year));
 
         monthBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        monthBox.setSelectedItem(month);
+        monthBox.setToolTipText("");
         monthBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 monthBoxActionPerformed(evt);
@@ -95,6 +102,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         jLabel5.setText("Name:");
 
         dayBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dayBox.setSelectedItem(day);
         dayBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dayBoxActionPerformed(evt);
@@ -193,8 +201,16 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please fill out all fields.");
         } else {
             name = jTextField4.getText();
+            try {
             amount = Double.valueOf(jTextField5.getText());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Please enter a numeric amount.");
+            }
+            try {
             year = Integer.valueOf(jTextField1.getText());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Please enter a valid numeric year.");
+            }
             category = jTextField7.getText();
             date = LocalDate.of(year, month, day);
 
@@ -206,7 +222,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                 System.out.println(controller.getBudget(category).getTransactionList().size());
                 
             } catch (Exception ex) {
-                Logger.getLogger(TransactionEntryScreen.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Category does not exist.");
             }                       
 
         }
