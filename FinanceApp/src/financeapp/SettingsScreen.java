@@ -316,6 +316,7 @@ public class SettingsScreen extends javax.swing.JPanel {
             
             
             frame.controller.totalBudget.setAmount(budget);
+            frame.controller.totalBudget.setBalance(budget);
             frame.controller.totalBudget.setAlert(alert);
             
             JOptionPane.showMessageDialog(null,"Your settings have been saved.");

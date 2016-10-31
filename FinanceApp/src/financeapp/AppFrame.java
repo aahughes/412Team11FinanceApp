@@ -19,7 +19,7 @@ public class AppFrame extends JFrame {
     
     
     private final int WINDOW_WIDTH = 400;
-    private final int WINDOW_HEIGHT = 400;
+    private final int WINDOW_HEIGHT = 500;
     
     MenuScreen menu;
     BudgetViewScreen budgetview;
