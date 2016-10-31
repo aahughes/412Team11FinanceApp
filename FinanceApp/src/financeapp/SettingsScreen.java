@@ -311,10 +311,18 @@ public class SettingsScreen extends javax.swing.JPanel {
         if (null == budgetField.getText() || null == alertField.getText()) {
             JOptionPane.showMessageDialog(null, "Please fill out all fields.");
         } else {
+            budget = Double.valueOf(budgetField.getText());
+            alert = Double.valueOf(alertField.getText());
+            
+            
             frame.controller.totalBudget.setAmount(budget);
             frame.controller.totalBudget.setAlert(alert);
             
             JOptionPane.showMessageDialog(null,"Your settings have been saved.");
+            
+            //debug
+            System.out.println(frame.controller.totalBudget.getAmount());
+            
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
