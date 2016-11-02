@@ -29,6 +29,9 @@ public class TransactionList extends ArrayList<Transaction> {
         for (Transaction t : this) {
             if (compareDates(t.getDate(),recentDate) && compareDates(pastDate,t.getDate())){
                 list.add(t);
+                
+                //debug
+                System.out.println("list added " + t.getName());
             }
         }
         return list;
@@ -41,6 +44,15 @@ public class TransactionList extends ArrayList<Transaction> {
         
     }
     
+    @Override
+    public String toString(){
+        String transactionlist = "";
+        for (Transaction t : this){
+            transactionlist = transactionlist + " " + t.getName();
+        }
+        
+        return this.get(0).getName();
+    }
     
     
 }

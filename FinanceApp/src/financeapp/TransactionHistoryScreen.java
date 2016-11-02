@@ -176,6 +176,9 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         
         for (TransactionList t : transactionlists){
             datedTransactions.addAll(t.getTransactionsByDateRange(now, then));
+            
+            //debug
+            System.out.println(t.toString());
         }
         
                 

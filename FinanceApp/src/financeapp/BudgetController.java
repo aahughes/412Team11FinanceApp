@@ -76,7 +76,12 @@ public class BudgetController {
         
         for (Budget b : budgets.values()){
             transactionlists.add(b.getTransactionList());
+
+            //debug
+            System.out.println(b.getTransactionList().toString());
         }
+        
+        
         
         return transactionlists;
     }

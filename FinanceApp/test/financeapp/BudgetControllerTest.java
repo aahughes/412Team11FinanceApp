@@ -5,6 +5,9 @@
  */
 package financeapp;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Set;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -100,6 +103,94 @@ public class BudgetControllerTest {
         Assert.assertEquals(expectedstring, testBudget.getCategory());
         Assert.assertEquals(expecteddouble, testBudget.getBalance());  
       
+    }
+
+    /**
+     * Test of subtractTotalBudget method, of class BudgetController.
+     */
+    @Test
+    public void testSubtractTotalBudget() {
+        System.out.println("subtractTotalBudget");
+        Double amount = null;
+        BudgetController instance = new BudgetController();
+        instance.subtractTotalBudget(amount);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBudget method, of class BudgetController.
+     */
+    @Test
+    public void testGetBudget() {
+        System.out.println("getBudget");
+        String category = "";
+        BudgetController instance = new BudgetController();
+        Budget expResult = null;
+        Budget result = instance.getBudget(category);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBudgetNames method, of class BudgetController.
+     */
+    @Test
+    public void testGetBudgetNames() {
+        System.out.println("getBudgetNames");
+        BudgetController instance = new BudgetController();
+        Set<String> expResult = null;
+        Set<String> result = instance.getBudgetNames();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBudgetNameList method, of class BudgetController.
+     */
+    @Test
+    public void testGetBudgetNameList() {
+        System.out.println("getBudgetNameList");
+        BudgetController instance = new BudgetController();
+        ArrayList<String> expResult = null;
+        ArrayList<String> result = instance.getBudgetNameList();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getBudgetList method, of class BudgetController.
+     */
+    @Test
+    public void testGetBudgetList() {
+        System.out.println("getBudgetList");
+        BudgetController instance = new BudgetController();
+        ArrayList<Budget> expResult = null;
+        ArrayList<Budget> result = instance.getBudgetList();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getTransactionLists method, of class BudgetController.
+     */
+    @Test
+    public void testGetTransactionLists() {
+        System.out.println("getTransactionLists");
+        BudgetController instance = new BudgetController();
+        instance.addBudget("food", 100.0, 100.0);
+        Transaction t1 = new Transaction("food",1,LocalDate.now());
+        instance.getBudget("food").addTransaction("food",1,LocalDate.now());
+       
+        ArrayList<TransactionList> expResult = new ArrayList<TransactionList>();
+        expResult.add(e);
+        ArrayList<TransactionList> result = instance.getTransactionLists();
+        assertEquals(expResult, result);
+        
     }
     
 }
