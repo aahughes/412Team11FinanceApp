@@ -42,9 +42,7 @@ public class AppFrame extends JFrame {
         controller = new BudgetController();
                 
         menu = new MenuScreen(this);
-        transactionentry = new TransactionEntryScreen(this);
-        
-        budgetentry = new BudgetEntryScreen(this);
+       
         
         this.add(menu);
     }
@@ -62,6 +60,7 @@ public class AppFrame extends JFrame {
     }
     
      public void openBudgetEntry(){
+        budgetentry = new BudgetEntryScreen(this);
         openPanel(budgetentry);
     }
     
@@ -70,7 +69,8 @@ public class AppFrame extends JFrame {
         openPanel(settings);
     }
     
-    public void openTransactionEntry(){
+    public void openTransactionEntry(){ 
+        transactionentry = new TransactionEntryScreen(this);
         openPanel(transactionentry);
     }
     

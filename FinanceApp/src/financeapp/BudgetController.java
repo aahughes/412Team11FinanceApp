@@ -39,6 +39,9 @@ public class BudgetController {
         budget.setBalance(balance);
     }
     
+    public void subtractTotalBudget(Double amount){
+        totalBudget.setBalance(totalBudget.getBalance() - amount);
+    }
     
     
     // Get budget by category

@@ -5,13 +5,18 @@
  */
 package financeapp;
 
+import java.awt.Component;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 /**
  *
@@ -28,7 +33,12 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     int year;
     String category;
     LocalDate date;
+    
+    ArrayList<String> namelist;
+    String[] names;
+    
     BudgetController controller;
+    
     
     /**
      * Creates new form TransactionEntryPanel
@@ -40,14 +50,19 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         this.controller = frame.controller;
         this.setSize(400, 400);
         
+        namelist = frame.controller.getBudgetNameList();
+        int size = namelist.size();
+        names = new String[size];        
+        namelist.toArray(names);
+        //debug
+        System.out.println(namelist.toString());
+        
         LocalDate now = LocalDate.now();
-        
-        
+                
         this.day = now.getDayOfMonth();
         this.month = now.getMonthValue();
         this.year = now.getYear();
-        
-                
+                        
         initComponents();
     }
 
@@ -60,7 +75,6 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -73,6 +87,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        nameBox = new javax.swing.JComboBox<>();
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +133,15 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Enter New Transaction");
 
+        nameBox.setModel(new DefaultComboBoxModel<>(names));
+        nameBox.setRenderer(new PromptComboBoxRenderer("Select Category"));
+        nameBox.setSelectedIndex(-1);
+        nameBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,11 +171,11 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(68, 68, 68)
                                 .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,8 +208,8 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
@@ -200,7 +224,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (null == jTextField4.getText() || null == jTextField5.getText() || null == jTextField1.getText() || null == jTextField7.getText()) {
+        if (null == jTextField4.getText() || null == jTextField5.getText() || null == jTextField1.getText() || null == nameBox.getSelectedItem()) {
             JOptionPane.showMessageDialog(null, "Please fill out all fields.");
         } else {
             name = jTextField4.getText();
@@ -214,19 +238,16 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Please enter a valid numeric year.");
             }
-            category = jTextField7.getText();
+            category = (String) nameBox.getSelectedItem();
             date = LocalDate.of(year, month, day);
 
-            try {
-                controller.getBudget(category).addTransaction(name, amount, date);
-                JOptionPane.showMessageDialog(null, "Transaction Saved.");
-                
-                //debug
-                System.out.println(controller.getBudget(category).getTransactionList().size());
-                
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Category does not exist.");
-            }                       
+            controller.getBudget(category).addTransaction(name, amount, date);
+            controller.subtractTotalBudget(amount);
+            JOptionPane.showMessageDialog(null, "Transaction Saved.");
+
+            //debug
+            System.out.println(controller.getBudget(category).getTransactionList().size());
+                                
 
         }
 
@@ -241,7 +262,12 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         day = Integer.valueOf(dayString);
     }//GEN-LAST:event_dayBoxActionPerformed
 
+    private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
+        
+    }//GEN-LAST:event_nameBoxActionPerformed
 
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> dayBox;
     private javax.swing.JButton jButton1;
@@ -254,7 +280,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JComboBox<String> monthBox;
+    private javax.swing.JComboBox<String> nameBox;
     // End of variables declaration//GEN-END:variables
 }

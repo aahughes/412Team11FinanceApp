@@ -130,6 +130,8 @@ public class BudgetViewScreen extends javax.swing.JPanel {
         amountBox.setEditable(false);
 
         nameBox.setModel(new DefaultComboBoxModel<>(names));
+        nameBox.setRenderer(new PromptComboBoxRenderer("Select Category"));
+        nameBox.setSelectedIndex(-1);
         nameBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameBoxActionPerformed(evt);
