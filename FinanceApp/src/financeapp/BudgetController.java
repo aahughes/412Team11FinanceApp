@@ -68,7 +68,9 @@ public class BudgetController {
     
     // Get list of budgets
     public ArrayList<Budget> getBudgetList(){
-        return (ArrayList<Budget>) budgets.values();
+        ArrayList<Budget> al = new ArrayList<>();
+        al.addAll(budgets.values());        
+        return al;
     }
     
     public ArrayList<TransactionList> getTransactionLists(){

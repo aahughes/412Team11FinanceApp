@@ -7,6 +7,7 @@ package financeapp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import junit.framework.Assert;
 import org.junit.After;
@@ -73,6 +74,7 @@ public class BudgetControllerTest {
         String category = "Food";
         Double amount = 100.00;
         BudgetController instance = new BudgetController();
+        instance.addBudget(category,200.0,100.0);
         instance.setBudgetAmount(category, amount);
 
         Budget testBudget = instance.getBudget(category);
@@ -93,6 +95,7 @@ public class BudgetControllerTest {
         String category = "Food";
         Double balance = 100.00;
         BudgetController instance = new BudgetController();
+        instance.addBudget(category, 200.0, 200.0);
         instance.setBudgetBalance(category, balance);
         
         Budget testBudget = instance.getBudget(category);
@@ -111,11 +114,12 @@ public class BudgetControllerTest {
     @Test
     public void testSubtractTotalBudget() {
         System.out.println("subtractTotalBudget");
-        Double amount = null;
+        Double amount = 10.0;
         BudgetController instance = new BudgetController();
+        instance.totalBudget.setBalance(20.0);
         instance.subtractTotalBudget(amount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Double result = instance.totalBudget.getBalance();
+        assertEquals(amount,result);
     }
 
     /**
@@ -124,13 +128,13 @@ public class BudgetControllerTest {
     @Test
     public void testGetBudget() {
         System.out.println("getBudget");
-        String category = "";
+        String category = "food";         
         BudgetController instance = new BudgetController();
-        Budget expResult = null;
+        instance.addBudget("food",100.0,100.0);
+        
+        Budget expResult = new Budget("food",100.0,100.0);
         Budget result = instance.getBudget(category);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult.getCategory(), result.getCategory());
     }
 
     /**
@@ -140,11 +144,15 @@ public class BudgetControllerTest {
     public void testGetBudgetNames() {
         System.out.println("getBudgetNames");
         BudgetController instance = new BudgetController();
-        Set<String> expResult = null;
+        instance.addBudget("food", 100.0, 100.0);
+        instance.addBudget("rent", 1000.0, 1000.0);
+        
+        Set<String> expResult = new HashSet<>();
+        expResult.add("food");
+        expResult.add("rent");
         Set<String> result = instance.getBudgetNames();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -154,11 +162,11 @@ public class BudgetControllerTest {
     public void testGetBudgetNameList() {
         System.out.println("getBudgetNameList");
         BudgetController instance = new BudgetController();
-        ArrayList<String> expResult = null;
+        instance.addBudget("food", 100.0, 100.0);
+        ArrayList<String> expResult = new ArrayList<>();
+        expResult.add("food");
         ArrayList<String> result = instance.getBudgetNameList();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -167,12 +175,17 @@ public class BudgetControllerTest {
     @Test
     public void testGetBudgetList() {
         System.out.println("getBudgetList");
+        String category = "food";
+        Double amount = 100.0;
+        Double balance = 100.0;
+        
         BudgetController instance = new BudgetController();
-        ArrayList<Budget> expResult = null;
+        instance.addBudget(category, amount, balance);
+        ArrayList<Budget> expResult = new ArrayList<>();
+        expResult.add(new Budget(category,amount,balance));
         ArrayList<Budget> result = instance.getBudgetList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult.get(0).getCategory(), result.get(0).getCategory());
+        
     }
 
     /**
@@ -186,10 +199,12 @@ public class BudgetControllerTest {
         Transaction t1 = new Transaction("food",1,LocalDate.now());
         instance.getBudget("food").addTransaction("food",1,LocalDate.now());
        
-        ArrayList<TransactionList> expResult = new ArrayList<TransactionList>();
-        expResult.add(e);
+        ArrayList<TransactionList> expResult = new ArrayList<>();
+        TransactionList tlist1 = new TransactionList();
+        tlist1.add(t1);
+        expResult.add(tlist1);
         ArrayList<TransactionList> result = instance.getTransactionLists();
-        assertEquals(expResult, result);
+        assertEquals(expResult.get(0).toString(), result.get(0).toString());
         
     }
     
