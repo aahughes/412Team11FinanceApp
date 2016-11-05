@@ -5,18 +5,10 @@
  */
 package financeapp;
 
-import java.awt.Component;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 /**
  *
@@ -48,7 +40,6 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         
         this.frame = theframe;
         this.controller = frame.controller;
-        this.setSize(400, 400);
         
         namelist = frame.controller.getBudgetNameList();
         int size = namelist.size();
@@ -58,10 +49,8 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         System.out.println(namelist.toString());
         
         LocalDate now = LocalDate.now();
-                
-        this.day = now.getDayOfMonth();
-        this.month = now.getMonthValue();
         this.year = now.getYear();
+        
                         
         initComponents();
     }
@@ -171,19 +160,21 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nameBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7))
                                 .addGap(18, 18, 18)
-                                .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -254,12 +245,15 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void monthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthBoxActionPerformed
-        month = Integer.valueOf(dayBox.getSelectedItem().toString());        
+        month = Integer.valueOf(monthBox.getSelectedItem().toString());        
     }//GEN-LAST:event_monthBoxActionPerformed
 
     private void dayBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayBoxActionPerformed
-        String dayString = monthBox.getSelectedItem().toString();
+        String dayString = dayBox.getSelectedItem().toString();
         day = Integer.valueOf(dayString);
+        //debug
+        //System.out.println(dayString);
+        //System.out.println(day);
     }//GEN-LAST:event_dayBoxActionPerformed
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed

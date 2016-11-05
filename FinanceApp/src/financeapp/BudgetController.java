@@ -5,6 +5,7 @@
  */
 package financeapp;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,16 @@ public class BudgetController {
     public BudgetController(){
        this.budgets = new HashMap();
        totalBudget = new TotalBudget(100.00,100.00,20.00);
+
+
+       //debug/test
+       addBudget("food",100.0,100.0);
+       getBudget("food").addTransaction("apple", 1.00, LocalDate.now());
+       getBudget("food").addTransaction("pear", 1.00, LocalDate.now());
+    
     }
+    
+    
     
     public void addBudget(String category, Double amount, Double balance){
         Budget newBudget = new Budget(category,amount,balance);

@@ -6,15 +6,9 @@
 package financeapp;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,8 +19,7 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
 
     AppFrame frame;
     
-    Date date1;
-    Date date2;
+    
     LocalDate now;
     
     ArrayList<TransactionList> transactionlists;
@@ -127,15 +120,13 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
                         .addGap(158, 158, 158)
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addComponent(timeFrameList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,17 +151,14 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         LocalDate then = now;
         
         switch (selected) {
-            case "Last Month": then.minusMonths(1);
+            case "Last Month": then = now.minusMonths(1);
                 break;
-            case "Last 6 Months": then.minusMonths(6);
+            case "Last 6 Months": then = now.minusMonths(6);
                 break;
-            default: then.minusWeeks(1);
+            default: then = now.minusWeeks(1);
                 break;
         }
-        
-       
-        date1 = Date.valueOf(now);
-        date2 = Date.valueOf(then);
+               
         
         datedTransactions = new TransactionList();
         
@@ -179,6 +167,7 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
             
             //debug
             System.out.println(t.toString());
+            System.out.println(datedTransactions.get(0).toString());
         }
         
                 
@@ -190,7 +179,7 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         frame.openMenu();
     }//GEN-LAST:event_backButtonActionPerformed
 
-     public void updateTableModel(TransactionList transactions){
+    public void updateTableModel(TransactionList transactions){
         //Create new table model
         DefaultTableModel tableModel = new DefaultTableModel();
 
@@ -202,13 +191,16 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         tableModel.addColumn("Date");
         
         tableModel.setRowCount(transactions.size());
-        int row = 1;
+        int row = 0;
         //Scroll through transactions
         
         for (Transaction t : transactions){
-            tableModel.setValueAt(t.getName(), row, 1);
-            tableModel.setValueAt(t.getAmount(), row, 2);
-            tableModel.setValueAt(t.getDate(), row, 3);
+            tableModel.setValueAt(t.getName(), row, 0);
+            //debug
+            System.out.println(t.getName());
+            
+            tableModel.setValueAt(t.getAmount(), row, 1);
+            tableModel.setValueAt(t.getDate(), row, 2);
             row++;
         }
 

@@ -33,17 +33,23 @@ public class TransactionListTest {
     /**
      * Test of getTransactionsByDate method, of class TransactionList.
      */
-//    @Test
-//    public void testGetTransactionsByDate() {
-//        System.out.println("getTransactionsByDate");
-//        LocalDate date = null;
-//        TransactionList instance = new TransactionList();
-//        ArrayList<Transaction> expResult = null;
-//        ArrayList<Transaction> result = instance.getTransactionsByDate(date);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetTransactionsByDate() {
+        System.out.println("getTransactionsByDate");
+        String name = "apple";
+        Double amount = 1.00;
+        LocalDate date = LocalDate.now();
+        Transaction t1 = new Transaction(name,amount,date);
+        
+        TransactionList instance = new TransactionList();
+        
+        instance.add(t1);
+        ArrayList<Transaction> expResult = new ArrayList<>();
+        expResult.add(t1);
+        ArrayList<Transaction> result = instance.getTransactionsByDate(date);
+        assertEquals(expResult, result);
+        
+    }
 
     /**
      * Test of getTransactionsByDateRange method, of class TransactionList.
@@ -61,7 +67,7 @@ public class TransactionListTest {
         instance.add(t1);
         instance.add(t2);
         instance.add(t3);
-        ArrayList<Transaction> expResult = new ArrayList<Transaction>();
+        ArrayList<Transaction> expResult = new ArrayList<>();
         expResult.add(t1); expResult.add(t2);
         ArrayList<Transaction> result = instance.getTransactionsByDateRange(recentDate, pastDate);
         assertEquals(expResult, result);

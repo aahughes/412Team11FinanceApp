@@ -9,6 +9,7 @@ package financeapp;
 // airon1995@gmail.com
 // 10-Oct-16
 
+import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -58,8 +59,14 @@ public class MenuScreen extends JPanel {
         transactionHistoryButton.addActionListener(new TransactionHistoryButtonListener());
         settingsButton.addActionListener(new SettingsButtonListener());
         
+        // Setting Layout
+        GridLayout layout = new GridLayout(0,3);
+        this.setLayout(layout);
+        
         // Adding the components to this panel.
+        this.add(new JLabel(""));
         this.add(label);
+        this.add(new JLabel(""));
         this.add(budgetButton);
         this.add(budgetEntryButton);
         this.add(transactionEntryButton);
