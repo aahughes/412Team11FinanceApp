@@ -49,6 +49,8 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         System.out.println(namelist.toString());
         
         LocalDate now = LocalDate.now();
+        this.day = 1;
+        this.month = 1;
         this.year = now.getYear();
         
                         
