@@ -6,11 +6,13 @@
 
 package financeapp;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mhilaire
  */
-public class TotalBudget {
+public class TotalBudget implements Serializable{
     private double amount;
     private double balance;
     private double budgetAlert;

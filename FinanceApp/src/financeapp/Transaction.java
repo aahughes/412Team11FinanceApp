@@ -5,13 +5,14 @@
  */
 package financeapp;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author Allison
  */
-public class Transaction {
+public class Transaction implements Serializable{
     
     private String name;
     private double amount;

@@ -6,6 +6,8 @@
 package financeapp;
 
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.*;
 
 /**
@@ -15,7 +17,7 @@ import javax.swing.*;
  * 
  * @author Allison
  */
-public class AppFrame extends JFrame {
+public class AppFrame extends JFrame implements WindowListener{
     
     
     private final int WINDOW_WIDTH = 450;
@@ -35,14 +37,16 @@ public class AppFrame extends JFrame {
     AppFrame(){
         setTitle("Finance App");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         this.setLocationRelativeTo(null);
         
         controller = new BudgetController();
+        controller.loadBudgets();
                 
         menu = new MenuScreen(this);
        
+        addWindowListener(this);
         
         this.add(menu);
     }
@@ -83,5 +87,35 @@ public class AppFrame extends JFrame {
         this.setContentPane(content);
         this.repaint();
         this.setVisible(true);
+    }
+
+    @Override
+    public void windowOpened(WindowEvent we) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent we) {
+        controller.saveBudgets();
+        this.dispose();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent we) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent we) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent we) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent we) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent we) {
     }
 }

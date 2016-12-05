@@ -5,6 +5,10 @@
  */
 package financeapp;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Allison
  */
-public class TransactionList extends ArrayList<Transaction> {
+public class TransactionList extends ArrayList<Transaction> implements Serializable {
     
     public ArrayList<Transaction> getTransactionsByDate(LocalDate date){
         ArrayList<Transaction> list = new ArrayList<>();

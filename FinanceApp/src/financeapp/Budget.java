@@ -5,6 +5,7 @@
  */
 package financeapp;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Allison
  */
-public class Budget {
+public class Budget implements Serializable {
     
     private final String category;
     private double amount;
