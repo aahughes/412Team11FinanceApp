@@ -43,6 +43,10 @@ public class AppFrame extends JFrame implements WindowListener{
         
         controller = new BudgetController();
         controller.loadBudgets();
+        
+        //add test values for easier testing/debugging
+        controller.addTestBudgetValues();
+        //
                 
         menu = new MenuScreen(this);
        

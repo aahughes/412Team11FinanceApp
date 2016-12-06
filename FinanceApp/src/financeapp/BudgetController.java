@@ -28,17 +28,15 @@ public class BudgetController {
     
     public BudgetController(){
        this.budgets = new HashMap();
-       totalBudget = new TotalBudget(100.00,100.00,20.00);
-
-
-       //debug/test values
-       addBudget("food",100.0,100.0);
-       getBudget("food").addTransaction("apple", 1.00, LocalDate.now());
-       getBudget("food").addTransaction("pear", 1.00, LocalDate.now());
-    
     }
-    
-   
+
+    //add debug/test values
+    public void addTestBudgetValues(){
+       addBudget("food",100.0,100.0);
+       addTransaction(getBudget("food"),"apple", 1.00, LocalDate.now());
+       addTransaction(getBudget("food"),"pear", 1.00, LocalDate.now());    
+    }
+       
     
     public void addBudget(String category, Double amount, Double balance){
         Budget newBudget = new Budget(category,amount,balance);
@@ -59,7 +57,10 @@ public class BudgetController {
         totalBudget.setBalance(totalBudget.getBalance() - amount);
     }
     
-    
+    public void addTransaction(Budget budget, String name, Double amount, LocalDate date){
+        budget.addTransaction(name, amount, date);
+        subtractTotalBudget(amount);
+    }
    
     
     // Get budget by category
@@ -103,6 +104,12 @@ public class BudgetController {
     } 
 
 
+    // Delete budgets and transactions
+    public void deleteBudgets(){
+        totalBudget = new TotalBudget(100.0,100.0,20.0);
+        budgets = new HashMap();
+    }
+    
     // serialize budget map
     
     public void saveBudgets(){
@@ -146,6 +153,7 @@ public class BudgetController {
             
             System.out.println(budgets.toString());
         } catch (IOException | ClassNotFoundException e){
+            totalBudget = new TotalBudget(100.0,100.0,20.0);
             }
     }
 }
