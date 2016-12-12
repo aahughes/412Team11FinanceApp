@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  *
- * @author hughe
+ * @author aahughes
  */
 public class MonthlyBudget implements Serializable{
     

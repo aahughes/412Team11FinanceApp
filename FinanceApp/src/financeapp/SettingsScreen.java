@@ -10,7 +10,7 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class SettingsScreen extends javax.swing.JPanel {
 
@@ -330,9 +330,9 @@ public class SettingsScreen extends javax.swing.JPanel {
             budget = Double.valueOf(budgetField.getText());
             alert = Double.valueOf(alertField.getText());
             
-            
+            double budgetlost = frame.controller.totalBudget.getAmount() - frame.controller.totalBudget.getBalance();
             frame.controller.totalBudget.setAmount(budget);
-            frame.controller.totalBudget.setBalance(budget);
+            frame.controller.totalBudget.setBalance(budget - budgetlost);
             frame.controller.totalBudget.setAlert(alert);
             
             JOptionPane.showMessageDialog(null,"Your settings have been saved.");

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class FinanceApp {
 

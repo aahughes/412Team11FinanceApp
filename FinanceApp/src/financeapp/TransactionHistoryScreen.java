@@ -5,15 +5,15 @@
  */
 package financeapp;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class TransactionHistoryScreen extends javax.swing.JPanel {
 
@@ -154,19 +154,27 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
         
         LocalDate then = now;
         
+        ArrayList<TransactionList> alltransactions = new ArrayList();
+        alltransactions.addAll(transactionlists);
+        
         switch (selected) {
             case "Last Month": then = now.minusMonths(1);
+                alltransactions.addAll(frame.controller.getTransactionListsbyMonth(then.getMonth()));
                 break;
             case "Last 6 Months": then = now.minusMonths(6);
+                Month month;
+                for (int i = 1; i <= 6; i++){
+                    month = now.minusMonths(i).getMonth();
+                    alltransactions.addAll(frame.controller.getTransactionListsbyMonth(month));
+                }
                 break;
             default: then = now.minusWeeks(1);
                 break;
         }
-               
         
         datedTransactions = new TransactionList();
         
-        for (TransactionList t : transactionlists){
+        for (TransactionList t : alltransactions){
             datedTransactions.addAll(t.getTransactionsByDateRange(now, then));
             
             //debug

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author aah5307
+ * @author aahughes
  */
 public class MenuScreen extends javax.swing.JPanel {
 

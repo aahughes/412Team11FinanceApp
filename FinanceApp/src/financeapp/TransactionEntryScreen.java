@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class TransactionEntryScreen extends javax.swing.JPanel {
 
@@ -50,7 +50,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         
         LocalDate now = LocalDate.now();
         this.day = 1;
-        this.month = 1;
+        this.month = now.getMonthValue();
         this.year = now.getYear();
         
                         

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class Budget implements Serializable {
     

@@ -11,26 +11,30 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author hughe
+ * @author aahughes
  */
 public class DataViewScreen extends javax.swing.JPanel {
     
     AppFrame frame;
     Month currentMonth;
     int monthIndex;
+    String totalAmount;
+    String totalBalance;
     
     /**
      * Creates new form DataViewScreen
+     * @param theframe
      */
     public DataViewScreen(AppFrame theframe) {
         this.frame = theframe;
         
         currentMonth = BudgetController.currentMonth;
         monthIndex = currentMonth.getValue() - 1;
-
+        frame.controller.updateMonth();
         
         initComponents();
         updateTableModel(getBudgetListByMonth(currentMonth));
+        setTotalAmountandBalance(currentMonth);
     }
 
     /**
@@ -46,6 +50,11 @@ public class DataViewScreen extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        totalBalanceField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        totalAmountField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         timeFrameList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" }));
         timeFrameList.setSelectedIndex(monthIndex);
@@ -76,33 +85,74 @@ public class DataViewScreen extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setText("Total Budget Balance:");
+
+        totalBalanceField.setText(totalBalance);
+
+        jLabel6.setText("Total Budget Amount:");
+
+        totalAmountField.setText(totalAmount);
+        totalAmountField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalAmountFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText(" Monthly Budgets");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(timeFrameList, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(totalAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(totalBalanceField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(55, 55, 55))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(timeFrameList, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(155, 155, 155))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(timeFrameList, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalBalanceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(backButton)
-                .addGap(37, 37, 37))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,7 +163,7 @@ public class DataViewScreen extends javax.swing.JPanel {
         
        
         updateTableModel(getBudgetListByMonth(selectedMonth));
-
+        setTotalAmountandBalance(selectedMonth);
     }//GEN-LAST:event_timeFrameListActionPerformed
 
     private ArrayList<Budget> getBudgetListByMonth(Month selectedMonth){
@@ -127,11 +177,28 @@ public class DataViewScreen extends javax.swing.JPanel {
         return budgetList;
     }
     
+    private void setTotalAmountandBalance(Month month){
+        MonthlyBudget currentBudget = frame.controller.getMonthlyBudget(month);
+        if (currentBudget != null){
+            totalAmount = Double.toString(currentBudget.getTotalBudget().getAmount());
+            totalBalance = Double.toString(currentBudget.getTotalBudget().getBalance());
+        }
+        else{
+            totalAmount = "---";
+            totalBalance = "---";
+        }     
+        totalAmountField.setText(totalAmount);
+        totalBalanceField.setText(totalBalance);
+    }
     
     
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         frame.openMenu();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void totalAmountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAmountFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalAmountFieldActionPerformed
 
 public void updateTableModel(ArrayList<Budget> budgetList){
         //Create new table model
@@ -142,7 +209,7 @@ public void updateTableModel(ArrayList<Budget> budgetList){
         
         tableModel.addColumn("Name");
         tableModel.addColumn("Amount");
-        tableModel.addColumn("Final Balance");
+        tableModel.addColumn("Balance");
         
         tableModel.setRowCount(budgetList.size());
         int row = 0;
@@ -163,8 +230,13 @@ public void updateTableModel(ArrayList<Budget> budgetList){
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     private javax.swing.JComboBox timeFrameList;
+    private javax.swing.JTextField totalAmountField;
+    private javax.swing.JTextField totalBalanceField;
     // End of variables declaration//GEN-END:variables
 }

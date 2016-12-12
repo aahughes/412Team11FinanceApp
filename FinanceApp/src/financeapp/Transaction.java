@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class Transaction implements Serializable{
     

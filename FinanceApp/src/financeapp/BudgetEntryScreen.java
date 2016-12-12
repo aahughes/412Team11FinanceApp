@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *
- * @author aah5307
+ * @author aahughes
  */
 public class BudgetEntryScreen extends javax.swing.JPanel {
 

@@ -5,9 +5,6 @@
  */
 package financeapp;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Allison
+ * @author aahughes
  */
 public class TransactionList extends ArrayList<Transaction> implements Serializable {
     
@@ -67,7 +64,7 @@ public class TransactionList extends ArrayList<Transaction> implements Serializa
             transactionlist = transactionlist + " " + t.getName();
         }
         
-        return this.get(0).getName();
+        return transactionlist;
     }
     
     

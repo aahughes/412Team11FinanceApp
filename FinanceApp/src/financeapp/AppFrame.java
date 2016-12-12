@@ -15,7 +15,7 @@ import javax.swing.*;
  * Main Frame of the application; contains other screens as panels
  * and switches between them as needed
  * 
- * @author Allison
+ * @author aahughes
  */
 public class AppFrame extends JFrame implements WindowListener{
     

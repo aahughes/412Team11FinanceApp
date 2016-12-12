@@ -7,7 +7,7 @@ package financeapp;
 
 /**
  *
- * @author aah5307
+ * @sourced from http://www.camick.com/java/source/PromptComboBoxRenderer.java
  */
 import java.awt.*;
 import javax.swing.*;

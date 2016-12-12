@@ -7,15 +7,7 @@
 package financeapp;
 
 import javax.swing.*;
-import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -272,16 +264,11 @@ public class BudgetViewScreen extends javax.swing.JPanel {
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
         String name = (String) nameBox.getSelectedItem();
-        ArrayList<Transaction> monthTransactions = frame.controller.getBudget(name).getTransactionList().getTransactionsByMonth(BudgetController.currentMonth);
         
-        System.out.println(monthTransactions.toString());
+        TransactionList transactions = frame.controller.getBudget(name).getTransactionList();
+       
+        System.out.println(transactions.toString());
         
-        TransactionList transactions = new TransactionList();
-        
-        for (Transaction t : monthTransactions){
-            transactions.add(t);
-        }
-                
         updateTableModel(transactions);
         
         String amount = Double.toString(frame.controller.getBudget(name).getAmount());
