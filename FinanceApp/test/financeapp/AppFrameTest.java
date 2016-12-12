@@ -84,7 +84,7 @@ public class AppFrameTest {
     public void testOpenTransactionEntry() {
         System.out.println("openTransactionEntry");
         AppFrame instance = new AppFrame();
-       
+        instance.openTransactionEntry();
         Assert.assertTrue(instance.transactionentry.isVisible());
     }
 

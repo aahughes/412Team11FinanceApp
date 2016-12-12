@@ -31,6 +31,7 @@ public class BudgetController {
     private Map<Month,MonthlyBudget> monthlyBudgets;
     
     public BudgetController(){ 
+       totalBudget = new TotalBudget(100.0,100.0,20.0);
        currentMonth = LocalDate.now().getMonth();
        this.budgets = new HashMap();
        this.monthlyBudgets = new HashMap();

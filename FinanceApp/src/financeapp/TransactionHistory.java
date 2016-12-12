@@ -8,20 +8,20 @@ package financeapp;
 
 /**
  *
- * @author mhilaire
+ * @author mhilaire, aahughes
  */
 public class TransactionHistory {
     private String year;
     private String month;
     private String day;
     
-    public TransactionHistory(String newYear, String newMonth, String newDay){
+    public TransactionHistory(String newMonth, String newDay, String newYear){
         year = newYear;
         month = newMonth;
         day = newDay;
     }
     
     public String getHistory(){
-        return month + day + ", " + year;
+        return month + " " + day + ", " + year;
     }
 }

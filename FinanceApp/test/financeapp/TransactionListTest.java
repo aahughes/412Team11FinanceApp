@@ -119,16 +119,16 @@ public class TransactionListTest {
     /**
      * Test of toString method, of class TransactionList.
      */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        TransactionList instance = new TransactionList();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testToString() {
+//        System.out.println("toString");
+//        TransactionList instance = new TransactionList();
+//        String expResult = "";
+//        String result = instance.toString();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of toString method, of class TransactionList.
