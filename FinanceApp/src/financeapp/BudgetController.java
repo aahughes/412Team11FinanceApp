@@ -106,8 +106,8 @@ public class BudgetController {
 
     // Delete budgets and transactions
     public void deleteBudgets(){
-        totalBudget = new TotalBudget(100.0,100.0,20.0);
-        budgets = new HashMap();
+        this.totalBudget = new TotalBudget(100.0,100.0,20.0);
+        this.budgets = new HashMap();
     }
     
     // serialize budget map
@@ -134,17 +134,7 @@ public class BudgetController {
         }
     }
     
-    public void loadBudgets(){
-        try{
-            FileInputStream fileIn = new FileInputStream("budgets.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            budgets = (Map<String,Budget>) in.readObject();
-            in.close();
-            
-            System.out.println(budgets.toString());
-        } catch (IOException | ClassNotFoundException e){
-            }
-        
+    public boolean loadBudgets(){
         try{
             FileInputStream fileIn = new FileInputStream("totalbudget.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -152,8 +142,30 @@ public class BudgetController {
             in.close();
             
             System.out.println(budgets.toString());
+            
+            fileIn = new FileInputStream("budgets.ser");
+            in = new ObjectInputStream(fileIn);
+            budgets = (Map<String,Budget>) in.readObject();
+            in.close();
+            
+            System.out.println(budgets.toString());
+            return true;
         } catch (IOException | ClassNotFoundException e){
             totalBudget = new TotalBudget(100.0,100.0,20.0);
-            }
+            return false;
+            } 
+    }
+    
+    // return total budget balance
+    
+    public double getTotalBalance(){
+        return totalBudget.getBalance();
+    }
+    
+    
+    // check if total budget alert should trigger
+     
+    public boolean checkAlert(){
+        return  totalBudget.getBalance() <= totalBudget.getAlert();
     }
 }

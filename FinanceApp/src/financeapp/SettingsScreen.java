@@ -352,8 +352,9 @@ public class SettingsScreen extends javax.swing.JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int i = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete all budgets and transactions?","Delete Budgets", YES_NO_OPTION);
-        if (i == 1){
-            frame.controller.deleteBudgets();            
+        if (i == 0){
+            frame.controller.deleteBudgets();
+            System.out.println("Data deleted");
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 

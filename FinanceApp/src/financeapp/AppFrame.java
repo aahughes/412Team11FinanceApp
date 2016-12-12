@@ -42,10 +42,13 @@ public class AppFrame extends JFrame implements WindowListener{
         this.setLocationRelativeTo(null);
         
         controller = new BudgetController();
-        controller.loadBudgets();
+        
+        // can remove boolean if test values not needed
+        boolean load = controller.loadBudgets();
         
         //add test values for easier testing/debugging
-        controller.addTestBudgetValues();
+        if (load) 
+            controller.addTestBudgetValues();
         //
                 
         menu = new MenuScreen(this);

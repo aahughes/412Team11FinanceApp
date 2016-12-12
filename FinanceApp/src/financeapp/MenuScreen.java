@@ -5,6 +5,8 @@
  */
 package financeapp;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aah5307
@@ -23,6 +25,11 @@ public class MenuScreen extends javax.swing.JPanel {
         initComponents();
         
         setVisible(true);
+        
+        if (frame.controller.checkAlert()){
+            String alertMessage = "Your budget has " + frame.controller.getTotalBalance() + " left!";
+            JOptionPane.showMessageDialog(null, alertMessage, "Budget Alert", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**
