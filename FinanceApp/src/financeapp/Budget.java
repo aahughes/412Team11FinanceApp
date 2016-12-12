@@ -7,6 +7,7 @@ package financeapp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 /**
@@ -19,12 +20,14 @@ public class Budget implements Serializable {
     private double amount;
     private double balance;
     TransactionList transactions;
+    Month month;
     
     public Budget(String name, double budgetedAmount, double newBalance){
         this.category = name;
         this.amount = budgetedAmount;
         this.balance = newBalance;
         this.transactions = new TransactionList();
+        this.month = BudgetController.currentMonth;
     }
     
     public void setAmount(double newAmount){

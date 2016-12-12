@@ -105,6 +105,8 @@ public class TransactionHistoryScreen extends javax.swing.JPanel {
 
             }
         ));
+        table.setRowSelectionAllowed(true);
+        table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(table);
 
         jScrollPane3.setViewportView(jScrollPane2);

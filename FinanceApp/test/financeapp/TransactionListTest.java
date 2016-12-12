@@ -8,10 +8,12 @@ package financeapp;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -28,6 +30,14 @@ public class TransactionListTest {
     
     @AfterClass
     public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     /**
@@ -85,6 +95,39 @@ public class TransactionListTest {
         boolean expResult = true;
         boolean result = instance.compareDates(beforeDate, afterDate);
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getTransactionsByMonth method, of class TransactionList.
+     */
+    @Test
+    public void testGetTransactionsByMonth() {
+        System.out.println("getTransactionsByMonth");
+        Month month = BudgetController.currentMonth;
+        TransactionList instance = new TransactionList();
+        instance.add(new Transaction("apple",1.00,LocalDate.now()));
+        instance.add(new Transaction("pear",2.00,LocalDate.of(1, Month.JANUARY, 1)));
+        
+        TransactionList resultList = new TransactionList();
+        resultList.add(new Transaction("apple",1.00,LocalDate.now()));
+        ArrayList<Transaction> expResult = resultList;
+        ArrayList<Transaction> result = instance.getTransactionsByMonth(month);
+        assertEquals(expResult.size(), result.size());
+        
+    }
+
+    /**
+     * Test of toString method, of class TransactionList.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        TransactionList instance = new TransactionList();
+        String expResult = "";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**

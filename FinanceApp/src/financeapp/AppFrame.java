@@ -29,6 +29,7 @@ public class AppFrame extends JFrame implements WindowListener{
     TransactionEntryScreen transactionentry;
     TransactionHistoryScreen transactionhistory;
     BudgetEntryScreen budgetentry;
+    DataViewScreen dataview;
     
     BudgetController controller;
     
@@ -87,11 +88,18 @@ public class AppFrame extends JFrame implements WindowListener{
         openPanel(transactionhistory);
     }
     
+    public void openDataView(){
+        dataview = new DataViewScreen(this);
+        openPanel(dataview);
+    }
+    
     public void openPanel(JComponent content){
         this.setContentPane(content);
         this.repaint();
         this.setVisible(true);
     }
+    
+    
 
     @Override
     public void windowOpened(WindowEvent we) {

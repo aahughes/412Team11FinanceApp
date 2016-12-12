@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,11 +25,18 @@ import java.util.Set;
  */
 public class BudgetController {
     
+    public static Month currentMonth = LocalDate.now().getMonth();
+    
     TotalBudget totalBudget;
     private Map<String,Budget> budgets;
     
-    public BudgetController(){
+    private Map<Month,MonthlyBudget> monthlyBudgets;
+    
+    public BudgetController(){ 
+       currentMonth = LocalDate.now().getMonth();
        this.budgets = new HashMap();
+       this.monthlyBudgets = new HashMap();
+       monthlyBudgets.put(currentMonth, new MonthlyBudget(currentMonth,budgets,totalBudget));
     }
 
     //add debug/test values if they do not already exist
@@ -36,9 +45,18 @@ public class BudgetController {
        addBudget("food",100.0,100.0);
        addTransaction(getBudget("food"),"apple", 1.00, LocalDate.now());
        addTransaction(getBudget("food"),"pear", 1.00, LocalDate.now());  
+       monthlyBudgets.put(Month.NOVEMBER, new MonthlyBudget(Month.NOVEMBER, new HashMap(), totalBudget));
+       monthlyBudgets.get(Month.NOVEMBER).getBudgets().put("food", new Budget("food",100.0,100.0));
+       monthlyBudgets.get(Month.NOVEMBER).getBudgets().get("food").addTransaction("pineapple",3.00,LocalDate.of(2016, Month.NOVEMBER,1));
        }
+       updateMonth();
     }
-       
+    
+    public MonthlyBudget getMonthlyBudget(Month month){
+        return monthlyBudgets.get(month);
+    }
+    
+    
     
     public void addBudget(String category, Double amount, Double balance){
         Budget newBudget = new Budget(category,amount,balance);
@@ -107,6 +125,12 @@ public class BudgetController {
         return transactionlists;
     } 
 
+    
+    // updates the monthlybudgets list with current month's budgets and total budget
+    
+    public void updateMonth(){
+        monthlyBudgets.put(currentMonth, new MonthlyBudget(currentMonth,budgets,totalBudget));
+    }
 
     // Delete budgets and transactions
     public void deleteBudgets(){
@@ -128,24 +152,38 @@ public class BudgetController {
         }
         
         try{
-            FileOutputStream fileOut = new FileOutputStream("totalbudget.ser");
+            updateMonth();
+            
+            FileOutputStream fileOut = new FileOutputStream("monthlybudgets.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(totalBudget);
+            out.writeObject(monthlyBudgets);
             out.close();
             
-            System.out.println("Total budget saved.");
+            System.out.println("Total budgets saved.");
         }catch(IOException e){
         }
     }
     
     public boolean loadBudgets(){
         try{
-            FileInputStream fileIn = new FileInputStream("totalbudget.ser");
+            FileInputStream fileIn = new FileInputStream("monthlyBudgets.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            totalBudget = (TotalBudget) in.readObject();
+            monthlyBudgets = (Map<Month,MonthlyBudget>) in.readObject();
             in.close();
             
             System.out.println(budgets.toString());
+            if (!monthlyBudgets.containsKey(currentMonth)){
+                if (monthlyBudgets.containsKey(currentMonth.minus(1))){
+                double budgetAmount = monthlyBudgets.get(currentMonth.minus(1)).getTotalBudget().getAmount();
+                double alertAmount = monthlyBudgets.get(currentMonth.minus(1)).getTotalBudget().getAlert();
+                totalBudget = new TotalBudget(budgetAmount,budgetAmount,alertAmount);
+                }
+                else {
+                    totalBudget = new TotalBudget(100.0,100.0,20.0);
+                }
+            }
+            else
+                totalBudget = monthlyBudgets.get(currentMonth).getTotalBudget();
             
             fileIn = new FileInputStream("budgets.ser");
             in = new ObjectInputStream(fileIn);
@@ -153,9 +191,19 @@ public class BudgetController {
             in.close();
             
             System.out.println(budgets.toString());
+            
+            if (!budgets.isEmpty()){
+                Month budgetMonth = getBudgetList().get(0).month;
+                if (budgetMonth != currentMonth){
+                    monthlyBudgets.put(budgetMonth, new MonthlyBudget(budgetMonth,budgets,totalBudget));
+                }
+            }
+            budgets = new HashMap();
+            
             return true;
         } catch (IOException | ClassNotFoundException e){
             totalBudget = new TotalBudget(100.0,100.0,20.0);
+            monthlyBudgets.put(currentMonth, new MonthlyBudget(currentMonth,budgets,totalBudget));
             return false;
             } 
     }

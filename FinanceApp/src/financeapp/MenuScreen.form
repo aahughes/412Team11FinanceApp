@@ -16,31 +16,27 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="transactionHistoryButton" min="-2" pref="162" max="-2" attributes="0"/>
                   <Component id="budgetButton" min="-2" pref="162" max="-2" attributes="0"/>
+                  <Component id="dataViewButton" min="-2" pref="162" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="62" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="transactionEntryButton" pref="162" max="32767" attributes="0"/>
-                  <Component id="budgetEntryButton" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="transactionEntryButton" pref="162" max="32767" attributes="0"/>
+                      <Component id="budgetEntryButton" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="settingsButton" alignment="1" min="-2" pref="162" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                      <Component id="settingsButton" min="-2" pref="162" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,9 +55,12 @@
                   <Component id="transactionEntryButton" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                   <Component id="transactionHistoryButton" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-              <Component id="settingsButton" min="-2" pref="70" max="-2" attributes="0"/>
-              <EmptySpace pref="85" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="settingsButton" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="dataViewButton" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="87" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,6 +112,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="dataViewButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Monthly Data"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataViewButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

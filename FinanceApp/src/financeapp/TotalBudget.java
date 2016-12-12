@@ -7,20 +7,23 @@
 package financeapp;
 
 import java.io.Serializable;
+import java.time.*;
 
 /**
  *
- * @author mhilaire
+ * @author mhilaire, aahughes
  */
 public class TotalBudget implements Serializable{
     private double amount;
     private double balance;
     private double budgetAlert;
+    private Month month;
     
     public TotalBudget (double newAmount, double newBalance, double newAlert) {
         this.amount = newAmount;
         this.balance = newBalance;
         this.budgetAlert = newAlert;
+        this.month = BudgetController.currentMonth;
     }
     
     

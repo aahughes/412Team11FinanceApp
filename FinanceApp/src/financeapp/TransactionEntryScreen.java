@@ -68,8 +68,6 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        monthBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         dayBox = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -79,6 +77,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         nameBox = new javax.swing.JComboBox<>();
+        monthLabel = new javax.swing.JLabel();
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -91,17 +90,6 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jTextField1.setText(Integer.toString(year));
-
-        monthBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        monthBox.setSelectedItem(month);
-        monthBox.setToolTipText("");
-        monthBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthBoxActionPerformed(evt);
             }
         });
 
@@ -133,6 +121,9 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
             }
         });
 
+        monthLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        monthLabel.setText(BudgetController.currentMonth.toString());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,9 +143,14 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(113, 113, 113))
                     .addGroup(layout.createSequentialGroup()
@@ -167,16 +163,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(68, 68, 68)
-                                        .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -192,14 +179,12 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                    .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthLabel))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,7 +202,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (null == jTextField4.getText() || null == jTextField5.getText() || null == jTextField1.getText() || null == nameBox.getSelectedItem()) {
+        if (null == jTextField4.getText() || null == jTextField5.getText() || null == nameBox.getSelectedItem()) {
             JOptionPane.showMessageDialog(null, "Please fill out all fields.");
         } else {
             name = jTextField4.getText();
@@ -226,11 +211,7 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Please enter a numeric amount.");
             }
-            try {
-            year = Integer.valueOf(jTextField1.getText());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Please enter a valid numeric year.");
-            }
+            
             category = (String) nameBox.getSelectedItem();
             date = LocalDate.of(year, month, day);
 
@@ -250,10 +231,6 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void monthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthBoxActionPerformed
-        month = Integer.valueOf(monthBox.getSelectedItem().toString());        
-    }//GEN-LAST:event_monthBoxActionPerformed
 
     private void dayBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayBoxActionPerformed
         String dayString = dayBox.getSelectedItem().toString();
@@ -278,10 +255,9 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JComboBox<String> monthBox;
+    private javax.swing.JLabel monthLabel;
     private javax.swing.JComboBox<String> nameBox;
     // End of variables declaration//GEN-END:variables
 }

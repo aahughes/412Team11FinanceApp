@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +48,17 @@ public class TransactionList extends ArrayList<Transaction> implements Serializa
         return (beforeDate.equals(afterDate) || beforeDate.isBefore(afterDate));     
         
     }
+    
+    public ArrayList<Transaction> getTransactionsByMonth(Month month){
+        ArrayList<Transaction> list = new ArrayList<>();
+        for (Transaction t : this) {
+            if (t.getDate().getMonth().equals(month)){
+                list.add(t);
+            }
+        }
+        return list;
+    }
+    
     
     @Override
     public String toString(){

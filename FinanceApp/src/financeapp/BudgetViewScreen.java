@@ -11,6 +11,7 @@ import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.logging.Level;
@@ -118,7 +119,8 @@ public class BudgetViewScreen extends javax.swing.JPanel {
         jLabel4.setText("Transactions:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Budgets");
+        jLabel5.setText(frame.controller.currentMonth.toString() + " BUDGET"
+        );
 
         remainingBox.setEditable(false);
         remainingBox.addActionListener(new java.awt.event.ActionListener() {
@@ -220,11 +222,11 @@ public class BudgetViewScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -270,7 +272,16 @@ public class BudgetViewScreen extends javax.swing.JPanel {
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
         String name = (String) nameBox.getSelectedItem();
-        transactions = frame.controller.getBudget(name).getTransactionList();
+        ArrayList<Transaction> monthTransactions = frame.controller.getBudget(name).getTransactionList().getTransactionsByMonth(BudgetController.currentMonth);
+        
+        System.out.println(monthTransactions.toString());
+        
+        TransactionList transactions = new TransactionList();
+        
+        for (Transaction t : monthTransactions){
+            transactions.add(t);
+        }
+                
         updateTableModel(transactions);
         
         String amount = Double.toString(frame.controller.getBudget(name).getAmount());
