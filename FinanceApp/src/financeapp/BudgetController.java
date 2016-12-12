@@ -30,11 +30,13 @@ public class BudgetController {
        this.budgets = new HashMap();
     }
 
-    //add debug/test values
+    //add debug/test values if they do not already exist
     public void addTestBudgetValues(){
+       if (getBudget("food") == null){
        addBudget("food",100.0,100.0);
        addTransaction(getBudget("food"),"apple", 1.00, LocalDate.now());
-       addTransaction(getBudget("food"),"pear", 1.00, LocalDate.now());    
+       addTransaction(getBudget("food"),"pear", 1.00, LocalDate.now());  
+       }
     }
        
     
@@ -53,10 +55,12 @@ public class BudgetController {
         budget.setBalance(balance);
     }
     
+    // subtract an amount from total budget
     public void subtractTotalBudget(Double amount){
         totalBudget.setBalance(totalBudget.getBalance() - amount);
     }
     
+    // used for adding test transactions to ensure total budget updates
     public void addTransaction(Budget budget, String name, Double amount, LocalDate date){
         budget.addTransaction(name, amount, date);
         subtractTotalBudget(amount);

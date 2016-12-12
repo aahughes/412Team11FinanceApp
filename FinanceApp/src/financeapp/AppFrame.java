@@ -42,12 +42,9 @@ public class AppFrame extends JFrame implements WindowListener{
         this.setLocationRelativeTo(null);
         
         controller = new BudgetController();
-        
-        // can remove boolean if test values not needed
-        boolean load = controller.loadBudgets();
+        controller.loadBudgets();
         
         //add test values for easier testing/debugging
-        if (load) 
             controller.addTestBudgetValues();
         //
                 

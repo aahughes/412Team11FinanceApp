@@ -237,6 +237,11 @@ public class TransactionEntryScreen extends javax.swing.JPanel {
             controller.getBudget(category).addTransaction(name, amount, date);
             controller.subtractTotalBudget(amount);
             JOptionPane.showMessageDialog(null, "Transaction Saved.");
+            if (controller.checkAlert()){
+                String alertMessage = "Your budget has " + frame.controller.getTotalBalance() + " left!";
+                JOptionPane.showMessageDialog(null, alertMessage, "Budget Alert", JOptionPane.WARNING_MESSAGE);        
+            }
+                
 
             //debug
             System.out.println(controller.getBudget(category).getTransactionList().size());
